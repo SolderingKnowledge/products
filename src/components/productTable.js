@@ -11,13 +11,13 @@ class ProductTable extends Component {
         let lastCategory = null;
 
         this.props.products.forEach((product) => {
-            if (product.name.indexOf(filterText) === -1) {
+            if (product.name.indexOf(filterText) === -1) {//"aikol".indexOf("input") == -1;Eger owol character jok bolso ele owol productu  chygarbai koiot
+                return;//stops the execution of function
+            }
+            if (inStockOnly && !product.stocked) { //false && !true;
                 return;
             }
-            if (inStockOnly && !product.stocked) {
-                return;
-            }
-            if (product.category !== lastCategory) {
+            if (product.category !== lastCategory) {//Electronics !== null
                 rows.push(
                     <ProductCategoryRow
                         category={product.category}
@@ -32,7 +32,6 @@ class ProductTable extends Component {
             );
             lastCategory = product.category;
         });
-
         return (
             <table>
                 <thead>
